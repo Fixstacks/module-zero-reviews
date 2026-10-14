@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+    Copyright © 2026 Roman Pasichnyk
+    SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- The rows go with the review (foreign keys); the files go here. -->
+    <event name="review_delete_before">
+        <observer name="zero_reviews_delete_photos" instance="Zero\Reviews\Observer\ReviewDeleted"/>
+    </event>
+    <!-- The Google review feed follows reviews as they are approved, edited or deleted. -->
+    <event name="review_save_after">
+        <observer name="zero_reviews_clean_feed" instance="Zero\Reviews\Observer\CleanFeed"/>
+    </event>
+    <event name="review_delete_after">
+        <observer name="zero_reviews_clean_feed" instance="Zero\Reviews\Observer\CleanFeed"/>
+    </event>
+</config>

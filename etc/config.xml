@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+    Copyright © 2026 Roman Pasichnyk
+    SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <zero_reviews>
+            <photos>
+                <enabled>1</enabled>
+            </photos>
+            <verified>
+                <enabled>1</enabled>
+            </verified>
+            <google_feed>
+                <enabled>0</enabled>
+            </google_feed>
+        </zero_reviews>
+    </default>
+</config>

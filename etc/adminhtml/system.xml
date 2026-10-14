@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!--
+    Copyright © 2026 Roman Pasichnyk
+    SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="zero_reviews" translate="label" type="text" sortOrder="98" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Reviews</label>
+            <tab>zero</tab>
+            <resource>Zero_Reviews::config</resource>
+            <group id="photos" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Photos</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Photos with Reviews</label>
+                    <comment>Up to 5 photos (JPEG, PNG, WebP, 8 MB each) per review. They show once the review is approved (Marketing > All Reviews), and go with it when it is deleted.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="verified" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Verified Purchase</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Show "Verified purchase"</label>
+                    <comment>On reviews by a signed-in customer who has an order with the product (not canceled).</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="google_feed" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google Product Reviews Feed</label>
+                <comment><![CDATA[The store view's approved reviews for Google Merchant Center (Product Reviews program: star ratings in Shopping ads and free listings) at <code>{store URL}/reviewfeed/google</code>. Products are matched by SKU (mpn) and brand, as in the product feed.]]></comment>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

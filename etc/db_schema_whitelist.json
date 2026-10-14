@@ -1,0 +1,29 @@
+{
+    "zero_review_photo": {
+        "column": {
+            "photo_id": true,
+            "review_id": true,
+            "file": true,
+            "width": true,
+            "height": true,
+            "position": true
+        },
+        "index": {
+            "ZERO_REVIEW_PHOTO_REVIEW_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ZERO_REVIEW_PHOTO_REVIEW_ID_REVIEW_REVIEW_ID": true
+        }
+    },
+    "zero_review_verified": {
+        "column": {
+            "review_id": true,
+            "order_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "ZERO_REVIEW_VERIFIED_REVIEW_ID_REVIEW_REVIEW_ID": true
+        }
+    }
+}

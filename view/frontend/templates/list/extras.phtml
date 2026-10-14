@@ -1,0 +1,45 @@
+<?php
+/**
+ * Copyright © 2026 Roman Pasichnyk
+ * SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+ *
+ * One review's "Verified purchase" badge and photos, rendered by the review
+ * list template for each review (setData('review_id')). A thumbnail opens
+ * the photo in a popover: HTML only, no script.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Zero\Reviews\ViewModel\Extras $extras
+ */
+$extras = $block->getData('extras');
+$reviewId = (int) $block->getData('review_id');
+$photos = $extras->photos($reviewId);
+?>
+<?php if ($extras->isVerified($reviewId)): ?>
+    <p class="review-verified badge badge-success badge-soft badge-sm gap-1 mb-3">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-3.5 h-3.5" aria-hidden="true"><path fill-rule="evenodd" d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 1 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0Z" clip-rule="evenodd"/></svg>
+        <?= $escaper->escapeHtml(__('Verified purchase')) ?>
+    </p>
+<?php endif; ?>
+<?php if ($photos): ?>
+    <ul class="review-photos flex flex-wrap gap-2 mb-3" aria-label="<?= $escaper->escapeHtmlAttr(__('Photos')) ?>">
+        <?php foreach ($photos as $i => $photo): ?>
+            <?php $id = 'review-photo-' . $reviewId . '-' . $i; ?>
+            <li>
+                <button type="button" popovertarget="<?= /* @noEscape */ $id ?>"
+                        class="block w-20 h-20 overflow-hidden border border-base-300 cursor-zoom-in focus-visible:outline-2">
+                    <img src="<?= $escaper->escapeUrl($photo['thumb']) ?>" alt="<?= $escaper->escapeHtmlAttr(__('Photo %1', $i + 1)) ?>"
+                         loading="lazy" width="80" height="80" class="w-full h-full object-cover">
+                </button>
+                <div id="<?= /* @noEscape */ $id ?>" popover
+                     class="review-photo-popover m-auto p-0 border-0 bg-transparent max-w-[95vw] max-h-[95vh] backdrop:bg-black/80">
+                    <img src="<?= $escaper->escapeUrl($photo['url']) ?>" alt="<?= $escaper->escapeHtmlAttr(__('Photo %1', $i + 1)) ?>"
+                         width="<?= (int) $photo['width'] ?>" height="<?= (int) $photo['height'] ?>" loading="lazy"
+                         class="block max-w-[95vw] max-h-[90vh] w-auto h-auto">
+                    <button type="button" popovertarget="<?= /* @noEscape */ $id ?>" popovertargetaction="hide"
+                            class="btn btn-sm btn-neutral absolute top-2 end-2"><?= $escaper->escapeHtml(__('Close')) ?></button>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

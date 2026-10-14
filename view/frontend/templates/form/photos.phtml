@@ -1,0 +1,28 @@
+<?php
+/**
+ * Copyright © 2026 Roman Pasichnyk
+ * SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+ *
+ * Photos in the "Write Your Own Review" form (its form.additional.review.info
+ * container; the form posts multipart). Checked again on the server.
+ *
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\Escaper $escaper
+ * @var \Zero\Reviews\ViewModel\Extras $extras
+ */
+$extras = $block->getData('extras');
+if (!$extras->photosEnabled()) {
+    return;
+}
+?>
+<div class="field review-field-photos">
+    <label for="review_photos" class="label"><span><?= $escaper->escapeHtml(__('Photos')) ?></span></label>
+    <div class="control">
+        <input type="file" name="photos[]" id="review_photos" multiple
+               accept="image/jpeg,image/png,image/webp" class="file-input file-input-bordered file-input-sm w-full max-w-md"
+               aria-describedby="review_photos_note">
+        <p id="review_photos_note" class="text-label text-base-content/60 mt-1">
+            <?= $escaper->escapeHtml(__('Up to %1 photos, JPEG, PNG or WebP, %2 MB each. Shown with your review once it is approved.', $extras->maxPhotos(), $extras->maxMegabytes())) ?>
+        </p>
+    </div>
+</div>

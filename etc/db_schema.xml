@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!--
+    Copyright © 2026 Roman Pasichnyk
+    SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="zero_review_photo" resource="default" engine="innodb" comment="Zero Review Photos">
+        <column xsi:type="int" name="photo_id" unsigned="true" nullable="false" identity="true" comment="Photo ID"/>
+        <column xsi:type="bigint" name="review_id" unsigned="true" nullable="false" comment="Review"/>
+        <column xsi:type="varchar" name="file" nullable="false" length="255" comment="Under media/zero_reviews/"/>
+        <column xsi:type="smallint" name="width" unsigned="true" nullable="false" comment="Width"/>
+        <column xsi:type="smallint" name="height" unsigned="true" nullable="false" comment="Height"/>
+        <column xsi:type="smallint" name="position" unsigned="true" nullable="false" default="0" comment="Position"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="photo_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="ZERO_REVIEW_PHOTO_REVIEW_ID_REVIEW_REVIEW_ID"
+                    table="zero_review_photo" column="review_id" referenceTable="review" referenceColumn="review_id"
+                    onDelete="CASCADE"/>
+        <index referenceId="ZERO_REVIEW_PHOTO_REVIEW_ID" indexType="btree">
+            <column name="review_id"/>
+        </index>
+    </table>
+    <table name="zero_review_verified" resource="default" engine="innodb" comment="Zero Verified Purchase Reviews">
+        <column xsi:type="bigint" name="review_id" unsigned="true" nullable="false" comment="Review"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" comment="The order with the product"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="review_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="ZERO_REVIEW_VERIFIED_REVIEW_ID_REVIEW_REVIEW_ID"
+                    table="zero_review_verified" column="review_id" referenceTable="review" referenceColumn="review_id"
+                    onDelete="CASCADE"/>
+    </table>
+</schema>

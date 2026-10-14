@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+    Copyright © 2026 Roman Pasichnyk
+    SPDX-License-Identifier: OSL-3.0 OR AFL-3.0
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <!-- After the commit: a photo that fails doesn't take the review with it. -->
+    <event name="review_save_commit_after">
+        <observer name="zero_reviews_photos_verified" instance="Zero\Reviews\Observer\ReviewSubmitted"/>
+    </event>
+</config>
