@@ -1,4 +1,4 @@
-# fixstacks/module-zero-reviews — licensing
+# zerofront/module-zero-reviews — licensing
 
 Copyright © 2026 Roman Pasichnyk.
 
